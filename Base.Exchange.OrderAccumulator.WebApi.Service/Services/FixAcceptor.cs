@@ -63,7 +63,7 @@ namespace Base.Exchange.OrderAccumulator.WebApi.Service.Services
             var executionReport = new QuickFix.FIX44.ExecutionReport(
                 new OrderID(Guid.NewGuid().ToString()),
                 new ExecID(Guid.NewGuid().ToString()),
-                new ExecType(ExecType.REJECTED),
+                new ExecType(execType),
                 new OrdStatus(execType),
                 new Symbol(symbol),
                 new Side(Side.BUY),
