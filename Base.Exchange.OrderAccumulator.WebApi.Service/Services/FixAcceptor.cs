@@ -48,7 +48,7 @@ namespace Base.Exchange.OrderAccumulator.WebApi.Service.Services
                 };
 
                 var result = await _orderSingleService.ExecuteNewOrderSingleAsync(request, (OrderSideEnum)message.GetInt(Side.TAG));
-                SendExecutionReport(request.Symbol, request.Quantity, sessionId, result);
+                SendExecutionReport(request.Symbol, request.Quantity, sessionId, result, message.GetInt(Side.TAG));
             }
             catch (Exception ex)
             {
@@ -56,10 +56,9 @@ namespace Base.Exchange.OrderAccumulator.WebApi.Service.Services
             }     
         }
 
-        private void SendExecutionReport(string symbol, decimal qty, SessionID sessionID, bool hasSuccess, OrderSideEnum side)
+        private void SendExecutionReport(string symbol, decimal qty, SessionID sessionID, bool hasSuccess, int sideId)
         {
             var execType = hasSuccess ? ExecType.NEW : ExecType.REJECTED;
-            char sideResponse = side == OrderSideEnum.BUY ? '1' : '2';
 
             var executionReport = new QuickFix.FIX44.ExecutionReport(
                 new OrderID(Guid.NewGuid().ToString()),
@@ -67,7 +66,7 @@ namespace Base.Exchange.OrderAccumulator.WebApi.Service.Services
                 new ExecType(execType),
                 new OrdStatus(execType),
                 new Symbol(symbol),
-                new Side(sideResponse),
+                new Side((char)sideId),
                 new LeavesQty(qty),
                 new CumQty(0),
                 new AvgPx(0)                
