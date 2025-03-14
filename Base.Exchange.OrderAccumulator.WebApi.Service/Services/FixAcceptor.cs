@@ -56,9 +56,10 @@ namespace Base.Exchange.OrderAccumulator.WebApi.Service.Services
             }     
         }
 
-        private void SendExecutionReport(string symbol, decimal qty, SessionID sessionID, bool hasSuccess)
+        private void SendExecutionReport(string symbol, decimal qty, SessionID sessionID, bool hasSuccess, OrderSideEnum side)
         {
             var execType = hasSuccess ? ExecType.NEW : ExecType.REJECTED;
+            char sideResponse = side == OrderSideEnum.BUY ? '1' : '0';
 
             var executionReport = new QuickFix.FIX44.ExecutionReport(
                 new OrderID(Guid.NewGuid().ToString()),
@@ -66,7 +67,7 @@ namespace Base.Exchange.OrderAccumulator.WebApi.Service.Services
                 new ExecType(execType),
                 new OrdStatus(execType),
                 new Symbol(symbol),
-                new Side(Side.BUY),
+                new Side(sideResponse),
                 new LeavesQty(qty),
                 new CumQty(0),
                 new AvgPx(0)                
