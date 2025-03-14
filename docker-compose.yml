@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  genial.b2b.partner.customer.core.webapi:
+    image: ${DOCKER_REGISTRY-}genialb2bpartnercustomercorewebapi
+    build:
+      context: .
+      dockerfile: Dockerfile

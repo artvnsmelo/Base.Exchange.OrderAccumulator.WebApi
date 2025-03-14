@@ -1,0 +1,21 @@
+
+global using System.Diagnostics.CodeAnalysis;
+global using System.Globalization;
+global using System.IO.Compression;
+global using System.Reflection;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using Microsoft.AspNetCore.Localization;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.Extensions.Localization;
+global using Microsoft.Extensions.Options;
+global using System.Security.Authentication;
+global using Microsoft.AspNetCore.ResponseCompression;
+global using System.Net.Mime;
+global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+global using Microsoft.Extensions.Diagnostics.HealthChecks;
+global using Microsoft.AspNetCore.Mvc.Controllers;
+global using Microsoft.OpenApi.Models;
+global using Swashbuckle.AspNetCore.SwaggerGen;
+global using System.Net;
+global using Microsoft.OpenApi.Any;

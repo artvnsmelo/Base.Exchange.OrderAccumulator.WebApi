@@ -1,0 +1,28 @@
+version: "3.9"
+
+name: genial-b2b-partner
+
+networks:
+  genial-b2b-partner:
+    driver: bridge
+
+services:
+  # Customer CORE API
+  core-customer-webapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: customer-core-webapi
+    restart: unless-stopped
+    environment:
+      - BUILD_CONFIGURATION=Debug
+      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 7001:80
+    volumes:
+      - ./.docker/core/customer:/data/api
+    extra_hosts:
+      - "host.docker.internal:172.18.0.1"
+    networks:
+      - genial-b2b-partner
